@@ -1,9 +1,11 @@
 import { Component, input, inject, OnInit , InputSignal} from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
+import {  CivilitePipe } from '../../../../shared/pipes/civilite.pipe'
+
 
 @Component({
   selector: 'app-personnes-detail',
-  imports: [],
+  imports: [CivilitePipe],
   templateUrl: './personnes-detail.page.html',
   styleUrl: './personnes-detail.page.scss',
 })
