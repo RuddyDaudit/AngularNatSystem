@@ -1,2 +1,6 @@
-<p>personnes-detail works!</p>
-<span>{{'M' | civilite}}</span>
+<app-label-value-cons labelWidth="140px" [value] = "[
+  {label: 'Nom', value:personne().nom},
+  {label: 'Prenom', value:personne().prenom},
+  {label: 'DateDeNaissance', value:personne().dateNaissance | date: 'dd/MM/yyyy'},
+] "/>
+

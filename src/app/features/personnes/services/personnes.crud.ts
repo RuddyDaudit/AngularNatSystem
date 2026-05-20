@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Personne } from '../../../shared/model/personnes.model';
-
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +11,17 @@ export class PersonnesCrud {
 
   baseUrl: string = 'http://localhost:8081';
 
-  getPersonnesById(id: string): Observable<Personne> { 
+  listPersonnesRes: HttpResourceRef<Personne[]> = httpResource(
+    () => `${this.baseUrl}/api/personnes/all`,
+  );
+
+  getPersonnesById(id: string): Observable<Personne> {
     const personneMocked: Personne = {
       id: 'id',
       nom: 'Mocked nom',
-      prenom: 'Mocked prennom',
+      prenom: 'Mocked prenom',
     };
-    return of(personneMocked);
+    const url = `${this.baseUrl}/api/personnes/${id}`;
+    return this.#http.get<Personne>(url);
   }
 }

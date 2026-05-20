@@ -1,0 +1,10 @@
+@for (lbv of value(); track $index){
+ <div class="flex items-center">
+  <span class = "font-medium flex justify-end" [style]="{ width:labelWidth()}" }>
+    {{lbv.label}} :
+  </span>
+   <span>
+     {{lbv.value | valueToString}}
+   </span>
+ </div>
+}

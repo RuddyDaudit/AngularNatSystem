@@ -2,5 +2,42 @@
     <p-button  label = "ajouter" icon="pi pi-plus" severity="success" (onClick)="addPersonne()">
     </p-button>
 </div>
-
-<p-dialog [(visible)] = "isDialogVisiblie" header = "Ajout d'une personne"></p-dialog>
+<div>
+  <p-table
+    [value] = "personnesList()"
+    [stripedRows]="true"
+    [loading]=" personnesListRes.isLoading()"
+    [showGridlines]="true"
+    selectionMode="single"
+    [rowHover]="true"
+    dataKey = "id"
+    (selectionChange)="selectPersonne($event)"
+  >
+    <ng-template #header>
+      <tr>
+        <th>Nom : </th>
+        <th>Prénom : </th>
+        <th>Né le : </th>
+        <th>Sexe : </th>
+        <th>Ville : </th>
+        <th>Salaire : </th>
+        <th>Père : </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-rowData>
+      <tr>
+        <tr [pSelectableRow]="rowData">
+        <td>{{rowData.nom}}</td>
+        <td>{{rowData.prenom}}</td>
+        <td>{{rowData.dateNaissance | date: 'dd/MM/yyyy'}}</td>
+        <td>{{rowData.sexe}}</td>
+        <td>{{rowData.ville?.nom}}</td>
+        <td>{{rowData.salaire | currency:'EUR': 'symbol': '.2-2'}}</td>
+        <td>{{rowData.pere}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog [(visible)] = "isDialogVisiblie" header = "Ajout d'une personne">
+  <app-personnes-form />
+</p-dialog>
