@@ -1,3 +1,98 @@
+<h2> Formulaire Template</h2>
 <form (submit)="submitForm()">
-  <p-button type="submit" label="Enregister"></p-button>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="nom"> Nom :</label>
+    <input name = "nom" id="nom" pInputText [(ngModel)]="newPersonne.nom" />
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="prenom"> Prénom :</label>
+    <input name = "prenom" id="prenom" pInputText [(ngModel)]="newPersonne.prenom" />
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="dateNaissance"> dateNaissance :</label>
+    <p-datePicker name = "dateNaissance" id ="dateNaissance"  appendTo = "body" [(ngModel)]="newPersonne.dateNaissance"></p-datePicker>
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <span class = "label-form">sexe : </span>
+     <p-radioButton id ="sexeM" value="M" name = "sexeRadio"   [(ngModel)]="newPersonne.sexe"></p-radioButton>
+    <label for="sexeM">M</label>
+    <p-radioButton id ="sexeF" value="F" name = "sexeRadio"   [(ngModel)]="newPersonne.sexe"></p-radioButton>
+    <label for="sexeF">F</label>
+  </div>
+    <div class = "flex justify-end">
+    <p-button type="submit" label="Enregister"></p-button>
+    </div>
+</form>
+
+<h2> Formulaire Reactive Form </h2>
+<form (submit)="submitReactiveForm()" [formGroup] = "personneForm()">
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="nom"> Nom :</label>
+    <input name = "nom" id="nom" pInputText required formControlName = "nom" />
+    @if (personneForm().get("nom").invalid && (personneForm().get('nom').touched || personneForm().get('nom').dirty)) {
+      <span class = "italic text-red-600"> Le champs est obligtoire</span>
+    }
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="prenom"> Prénom :</label>
+    <input name = "prenom" id="prenom" pInputText required formControlName = "prenom" />
+    @if (personneForm().get("prenom").invalid && (personneForm().get('prenom').touched || personneForm().get('prenom').dirty)) {
+      <span class = "italic text-red-600"> Le champs est obligtoire</span>
+    }
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="dateNaissance"> dateNaissance :</label>
+    <p-datePicker name = "dateNaissance" id ="dateNaissance"  appendTo = "body" formControlName = "dateNaissance"></p-datePicker>
+    @if (personneForm().get("dateNaissance").invalid && (personneForm().get('dateNaissance').touched || personneForm().get('dateNaissance').dirty)) {
+      <span class = "italic text-red-600"> Le champs est obligtoire</span>
+    }
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <span class = "label-form">sexe : </span>
+    <p-radioButton id ="sexeM" value="M" name = "sexeRadio" formControlName="sexe"></p-radioButton>
+    <label for="sexeM">M</label>
+    <p-radioButton id ="sexeF" value="F" name = "sexeRadio" formControlName="sexe"></p-radioButton>
+    <label for="sexeF">F</label>
+  </div>
+  <div class = "flex justify-end">
+    <p-button type="submit" label="Enregister"></p-button>
+  </div>
+</form>
+
+<h2> Formulaire signal</h2>
+<form (submit)="submitSignalForm()">
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="nom"> Nom :</label>
+    <input  id="nom" pInputText [formField]="personneSignalForm.nom" />
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="prenom"> Prénom :</label>
+    <input  id="prenom" pInputText [formField]="personneSignalForm.prenom" />
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="dateNaissance"> dateNaissance :</label>
+    <input id = "dateNaissance" type = "date" [formField]="personneSignalForm.dateNaissance">
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <span class = "label-form">sexe : </span>
+    <p-radioButton id ="sexeM" value="M"  [formField]="personneSignalForm.sexe"></p-radioButton>
+    <label for="sexeM">M</label>
+    <p-radioButton id ="sexeF" value="F"  [formField]="personneSignalForm.sexe"></p-radioButton>
+    <label for="sexeF">F</label>
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+  <label for = "ville" class = "label-form"> Ville :</label>
+  <p-auto-complete
+    id = "ville"
+    formControlName = "ville"
+    [suggestions]="villeSugg"
+    (completeMethod)="onCompeteVille($event.query)"
+    appendTo=" body"
+    optionLabel="nom"
+    [dropdown]="true"
+    />
+  </div>
+  <div class = "flex justify-end">
+    <p-button type="submit" label="Enregister" ></p-button>
+  </div>
 </form>

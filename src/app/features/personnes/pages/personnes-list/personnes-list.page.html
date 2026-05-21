@@ -6,7 +6,6 @@
   <p-table
     [value] = "personnesList()"
     [stripedRows]="true"
-    [loading]=" personnesListRes.isLoading()"
     [showGridlines]="true"
     selectionMode="single"
     [rowHover]="true"
@@ -39,5 +38,11 @@
   </p-table>
 </div>
 <p-dialog [(visible)] = "isDialogVisiblie" header = "Ajout d'une personne">
-  <app-personnes-form />
+  <app-personnes-form [personneForm]="personneForm" />
+  <ng-template #footer>
+    <div class = "flex justify-between w-full pt-2">
+      <p-button label = "Annuler" (onClick)="isDialogVisiblie = false" severity="secondary"/>
+      <p-button label = "Enregistrer" (onClick)="savePersonne()" />
+    </div>
+  </ng-template>
 </p-dialog>

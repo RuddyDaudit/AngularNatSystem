@@ -11,6 +11,7 @@ import { HighlightDirective } from '../../../../shared/directives/highlight.dire
 import { ReplaceByNrDirective } from '../../../../shared/directives/replace-by-nr.directive';
 import { InputText } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
+import { interval, timer } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +22,16 @@ import { FormsModule } from '@angular/forms';
 export class DashboardPage {
   test = 'Hello';
   clickedVar: string;
+  logged: string;
+  counter = 0;
+  interval$ = interval(1000);
+
+  ngOnInit() {
+    setInterval(() => {
+      this.logged = `Compteur = ${this.counter}`;
+      this.counter++;
+    }, 1000);
+  }
 
   click(): void {
     console.debug('clicked');

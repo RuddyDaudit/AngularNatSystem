@@ -24,4 +24,24 @@ export class PersonnesCrud {
     const url = `${this.baseUrl}/api/personnes/${id}`;
     return this.#http.get<Personne>(url);
   }
+  postPersonne(personne: Personne): Observable<Personne> {
+    const url = `${this.baseUrl}/api/personnes`;
+    return this.#http.post<Personne>(url, personne);
+  }
+
+  addNewPersonne(personne: Personne): Observable<Personne> {
+    console.log('addNewPersonne', personne);
+    const url = `${this.baseUrl}/api/personnes`;
+    return this.#http.post<Personne>(url, personne);
+  }
+
+  updatePersonne(personne: Personne): Observable<Personne> {
+    const url = `${this.baseUrl}/api/personnes/${personne.id}`;
+    return this.#http.put<Personne>(url, personne);
+  }
+
+  deletePersonne(id: string): Observable<void> {
+    const url = `${this.baseUrl}/api/personnes/${id}`;
+    return this.#http.delete<void>(url);
+  }
 }
