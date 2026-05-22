@@ -91,7 +91,17 @@ export class PersonnesListPage {
           },
         });
     } else {
-      console.error('Form invalid, cannot save personne', this.personneForm);
+      console.error('Formulaire Invalide', this.personneForm);
+      this.isLoading.set(false);
+      this.#toast.add({
+        severity: 'error',
+        summary: 'Champs invalides',
+        detail: `Veuiilez rentrer les bonnes informations`,
+        life: 3000,
+      });
+      this.personnesListRes.reload();
+      this.personneForm.reset();
+      this.isDialogVisiblie = true;
     }
     console.log(this.personneForm.value());
   }

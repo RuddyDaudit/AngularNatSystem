@@ -1,4 +1,4 @@
-<h2> Formulaire Template</h2>
+<!-- <h2> Formulaire Template</h2>
 <form (submit)="submitForm()">
   <div class = "flex items-center gap-2 pb-1">
     <label class = "label-form" for="nom"> Nom :</label>
@@ -23,6 +23,45 @@
     <p-button type="submit" label="Enregister"></p-button>
     </div>
 </form>
+-->
+
+<!-- <h2> Formulaire signal</h2>
+<form (submit)="submitSignalForm()">
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="nom"> Nom :</label>
+    <input  id="nom" pInputText [formField]="personneSignalForm.nom" />
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="prenom"> Prénom :</label>
+    <input  id="prenom" pInputText [formField]="personneSignalForm.prenom" />
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label class = "label-form" for="dateNaissance"> dateNaissance :</label>
+    <input id = "dateNaissance" type = "date" [formField]="personneSignalForm.dateNaissance">
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <span class = "label-form">sexe : </span>
+    <p-radioButton id ="sexeM" value="M"  [formField]="personneSignalForm.sexe"></p-radioButton>
+    <label for="sexeM">M</label>
+    <p-radioButton id ="sexeF" value="F"  [formField]="personneSignalForm.sexe"></p-radioButton>
+    <label for="sexeF">F</label>
+  </div>
+  <div class = "flex items-center gap-2 pb-1">
+    <label for = "ville" class = "label-form"> Ville :</label>
+    <p-auto-complete
+      id = "ville"
+      [suggestions]="villeSugg"
+      (completeMethod)="onCompeteVille($event.query)"
+      appendTo=" body"
+      optionLabel="nom"
+      [dropdown]="true"
+    />
+  </div>
+  <div class = "flex justify-end">
+    <p-button type="submit" label="Enregister" ></p-button>
+  </div>
+</form>
+-->
 
 <h2> Formulaire Reactive Form </h2>
 <form (submit)="submitReactiveForm()" [formGroup] = "personneForm()">
@@ -54,44 +93,8 @@
     <p-radioButton id ="sexeF" value="F" name = "sexeRadio" formControlName="sexe"></p-radioButton>
     <label for="sexeF">F</label>
   </div>
-  <div class = "flex justify-end">
-    <p-button type="submit" label="Enregister"></p-button>
-  </div>
 </form>
 
-<h2> Formulaire signal</h2>
-<form (submit)="submitSignalForm()">
-  <div class = "flex items-center gap-2 pb-1">
-    <label class = "label-form" for="nom"> Nom :</label>
-    <input  id="nom" pInputText [formField]="personneSignalForm.nom" />
-  </div>
-  <div class = "flex items-center gap-2 pb-1">
-    <label class = "label-form" for="prenom"> Prénom :</label>
-    <input  id="prenom" pInputText [formField]="personneSignalForm.prenom" />
-  </div>
-  <div class = "flex items-center gap-2 pb-1">
-    <label class = "label-form" for="dateNaissance"> dateNaissance :</label>
-    <input id = "dateNaissance" type = "date" [formField]="personneSignalForm.dateNaissance">
-  </div>
-  <div class = "flex items-center gap-2 pb-1">
-    <span class = "label-form">sexe : </span>
-    <p-radioButton id ="sexeM" value="M"  [formField]="personneSignalForm.sexe"></p-radioButton>
-    <label for="sexeM">M</label>
-    <p-radioButton id ="sexeF" value="F"  [formField]="personneSignalForm.sexe"></p-radioButton>
-    <label for="sexeF">F</label>
-  </div>
-  <div class = "flex items-center gap-2 pb-1">
-  <label for = "ville" class = "label-form"> Ville :</label>
-  <p-auto-complete
-    id = "ville"
-    [suggestions]="villeSugg"
-    (completeMethod)="onCompeteVille($event.query)"
-    appendTo=" body"
-    optionLabel="nom"
-    [dropdown]="true"
-    />
-  </div>
-  <div class = "flex justify-end">
-    <p-button type="submit" label="Enregister" ></p-button>
-  </div>
-</form>
+
+
+
