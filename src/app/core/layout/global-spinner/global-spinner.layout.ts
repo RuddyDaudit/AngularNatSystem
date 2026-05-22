@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, InputSignal, signal, WritableSignal } from '@angular/core';
 import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
@@ -8,5 +8,6 @@ import { ProgressSpinner } from 'primeng/progressspinner';
   styleUrl: './global-spinner.layout.scss',
 })
 export class GlobalSpinnerLayout {
-  isLoading: boolean = false;
+  //isLoading: boolean = false;
+  isLoading: InputSignal<boolean> = input(false);
 }

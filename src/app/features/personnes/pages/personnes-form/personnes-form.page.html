@@ -84,7 +84,6 @@
   <label for = "ville" class = "label-form"> Ville :</label>
   <p-auto-complete
     id = "ville"
-    formControlName = "ville"
     [suggestions]="villeSugg"
     (completeMethod)="onCompeteVille($event.query)"
     appendTo=" body"

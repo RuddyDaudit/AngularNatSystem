@@ -8,7 +8,9 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { httpInterceptor } from './core/interceptors/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +22,7 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptor])),
+    MessageService,
   ],
 };

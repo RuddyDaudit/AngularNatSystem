@@ -10,8 +10,9 @@ import { CivilitePipe } from './shared/pipes/civilite.pipe';
 import { readonly } from '@angular/forms/signals';
 import { VilleCrud } from './shared/services/ville.crud';
 import { DataStore } from './shared/services/data.store';
-import { filter, take } from 'rxjs';
+import { filter, map, Observable, take, tap } from 'rxjs';
 import { Ville } from './shared/model/ville.model';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { Ville } from './shared/model/ville.model';
     GlobalSpinnerLayout,
     FooterLayout,
     CivilitePipe,
+    AsyncPipe,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -31,6 +33,11 @@ export class App {
   readonly #storeCrud = inject(DataStore);
   selectedMode: 'light' | 'dark' = undefined;
   villesStockees = this.#storeCrud.ville;
+
+  villes$: Observable<string> = this.#storeCrud.getVille$().pipe(
+    tap((v: Ville[]) => console.log(v)),
+    map((v: Ville[]) => (v?.length > 0 ? `${v.length}` : 'aucune')),
+  );
 
   ngOnInit() {
     this.#villeCrud

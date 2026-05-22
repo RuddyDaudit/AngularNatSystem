@@ -1,6 +1,6 @@
 import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { Personne } from '../../../shared/model/personnes.model';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class PersonnesCrud {
   addNewPersonne(personne: Personne): Observable<Personne> {
     console.log('addNewPersonne', personne);
     const url = `${this.baseUrl}/api/personnes`;
-    return this.#http.post<Personne>(url, personne);
+    return this.#http.post<Personne>(url, personne).pipe(delay(2000));
   }
 
   updatePersonne(personne: Personne): Observable<Personne> {
